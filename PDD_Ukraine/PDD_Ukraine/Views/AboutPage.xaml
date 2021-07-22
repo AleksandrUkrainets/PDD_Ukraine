@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PDD_Ukraine.Views.AboutPage"
-             xmlns:vm="clr-namespace:PDD_Ukraine.ViewModels"
+             xmlns:local="clr-namespace:PDD_Ukraine.ViewModels"  
+             xmlns:model="clr-namespace:PDD_Ukraine.Models"  
              Title="{Binding Title}">
 
     <!--<ContentPage.BindingContext>
@@ -20,31 +21,65 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <!--<RowDefinition Height="*" />-->
         </Grid.RowDefinitions>
-        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+        <!--<StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                 <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
                     <Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64" />
                 </ContentView>
-
-
             </StackLayout>
-        </StackLayout>
-        <ScrollView Grid.Row="1">
-            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-
-                <AbsoluteLayout x:Name="absoluteLayout3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
-                                HeightRequest="352" WidthRequest="236" BackgroundColor="Chocolate">
+        </StackLayout>-->
+        <StackLayout  x:DataType="local:AboutViewModel" Orientation="Vertical" Padding="10,24,10,24" Spacing="10" Grid.Row="1">
+            <SwipeView>
+                <SwipeView.LeftItems>
+                    <SwipeItems Mode="Execute">
+                        <SwipeItem Invoked="SwipeItem_Invoked_Right" Command="{Binding GetNextItemCommand}" />
+                    </SwipeItems>
+                </SwipeView.LeftItems>
+                <SwipeView.RightItems>
+                    <SwipeItems Mode="Execute">
+                        <SwipeItem Invoked="SwipeItem_Invoked_Left"  Command="{Binding GetNextItemCommand}"/>
+                    </SwipeItems>
+                </SwipeView.RightItems>
+                <AbsoluteLayout x:Name="absoluteLayout3"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                                HeightRequest="352" WidthRequest="236">
                     <ImageButton x:Name="imageButton" HeightRequest="352" WidthRequest="236" CornerRadius="30" Aspect="Fill"
                                  HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" BorderWidth="3" BorderColor="DarkSlateGray"
-                                 Source="monkey.png" Clicked="rotateLayout_Clicked"/>
-                    <Button x:Name="rotateLayout2" HeightRequest="352" WidthRequest="236" IsVisible="false" CornerRadius="30" BorderWidth="3" BorderColor="DarkSlateGray"
-                            Text="rotateLayout2 rotateLayout2 rotateLayout2 rotateLayout2 rotateLayout2rotateLayout2 rotateLayout2 rotateLayout2 " 
+                                 Source="monkey.png" Clicked="rotateLayout_Clicked" />
+                    <Button x:Name="textButton" HeightRequest="352" WidthRequest="236" IsVisible="false" CornerRadius="30" BorderWidth="3" BorderColor="DarkSlateGray"
+                            Text="{Binding Path=NextItem.Text}" 
                             BackgroundColor="Red" TextColor="AliceBlue" FontSize="20" Clicked="rotateLayout_Clicked"/>
                 </AbsoluteLayout>
-
-            </StackLayout>
-        </ScrollView>
+            </SwipeView>
+        </StackLayout>
+        <!--<RefreshView x:DataType="local:AboutViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Grid.Row="2">
+            <CollectionView x:Name="ItemsListView"
+                ItemsSource="{Binding Items}"
+                SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10" x:DataType="model:Item">
+                            <Label Text="{Binding Text}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="16" />
+                            <Label Text="{Binding Description}" 
+                            LineBreakMode="NoWrap"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            FontSize="13" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:AboutViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>-->
     </Grid>
 
 

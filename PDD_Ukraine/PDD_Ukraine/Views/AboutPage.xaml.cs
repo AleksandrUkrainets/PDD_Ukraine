@@ -30,8 +30,6 @@ namespace PDD_Ukraine.Views
 
         private async void RotateCard()
         {
-            ImageButton imageButton = absoluteLayout3.FindByName("imageButton") as ImageButton;
-            Button but2 = absoluteLayout3.FindByName("rotateLayout2") as Button;
             absoluteLayout3.TranslateTo(100, 0, 400);
             await absoluteLayout3.RotateYTo(-90, 200);
             absoluteLayout3.RotationY = -270;
@@ -39,19 +37,42 @@ namespace PDD_Ukraine.Views
             if (!_isFrontSideCard)
             {
                 imageButton.IsVisible = false;
-                but2.IsVisible = true;
+                textButton.IsVisible = true;
                 _isFrontSideCard = true;
             }
             else
             {
                 imageButton.IsVisible = true;
-                but2.IsVisible = false;
+                textButton.IsVisible = false;
                 _isFrontSideCard = false;
             }
 
             absoluteLayout3.RotateYTo(-360, 200);
-            await absoluteLayout3.TranslateTo(0, 0, 222);
+            await absoluteLayout3.TranslateTo(0, 0, 200);
             absoluteLayout3.RotationY = 0;
+        }
+
+        private async void SwipeItem_Invoked_Right(object sender, EventArgs e)
+        {
+            absoluteLayout3.IsVisible = false;
+            MoveToStartPosition();
+        }
+
+        private async void SwipeItem_Invoked_Left(object sender, EventArgs e)
+        {
+            absoluteLayout3.IsVisible = false;
+            MoveToStartPosition();
+        }
+
+        private async void MoveToStartPosition()
+        {
+            absoluteLayout3.RotateYTo(-360, 200);
+            await absoluteLayout3.TranslateTo(0, 0, 200);
+            absoluteLayout3.RotationY = 0;
+            imageButton.IsVisible = true;
+            textButton.IsVisible = false;
+            _isFrontSideCard = false;
+            absoluteLayout3.IsVisible = true;
         }
     }
 }

@@ -1,11 +1,59 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace PDD_Ukraine.Models
 {
-    public class Item
+    public class Item //: INotifyPropertyChanged
     {
         public string Id { get; set; }
         public string Text { get; set; }
         public string Description { get; set; }
+        //private string id;
+        //private string text;
+        //private string description;
+        //public string Id
+        //{
+        //    get { return id; }
+        //    set
+        //    {
+        //        if (id != value)
+        //        {
+        //            id = value;
+        //            OnPropertyChanged("id");
+        //        }
+        //    }
+        //}
+        //public string Text
+        //{
+        //    get { return text; }
+        //    set
+        //    {
+        //        if (text != value)
+        //        {
+        //            text = value;
+        //            OnPropertyChanged("text");
+        //        }
+        //    }
+        //}
+        //public string Description
+        //{
+        //    get { return description; }
+        //    set
+        //    {
+        //        if (description != value)
+        //        {
+        //            description = value;
+        //            OnPropertyChanged("description");
+        //        }
+        //    }
+        //}
+
+
+        //public event PropertyChangedEventHandler PropertyChanged;
+        //public void OnPropertyChanged(string prop = "")
+        //{
+        //    if (PropertyChanged != null)
+        //        PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        //}
     }
 }
