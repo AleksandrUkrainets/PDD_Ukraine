@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace PDD_Ukraine.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore : IDataStore<Card>
     {
-        readonly List<Item> items;
+        private readonly List<Card> items;
 
         public MockDataStore()
         {
-            items = new List<Item>()
+            items = new List<Card>()
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
+                new Card { Id = Guid.NewGuid().ToString(), Name = "First item", Description = "This is an item description.", State = CardState.CorrectAnswered},
+                new Card { Id = Guid.NewGuid().ToString(), Name = "Second item", Description = "This is an item description.", State = CardState.IncorrectAnswered },
+                new Card { Id = Guid.NewGuid().ToString(), Name = "Third item", Description = "This is an item description.", State = CardState.UnAnswered },
+                new Card { Id = Guid.NewGuid().ToString(), Name = "Fourth item", Description = "This is an item description.", State = CardState.UnAnswered },
+                new Card { Id = Guid.NewGuid().ToString(), Name = "Fifth item", Description = "This is an item description.", State = CardState.UnAnswered },
+                new Card { Id = Guid.NewGuid().ToString(), Name = "Sixth item", Description = "This is an item description.", State = CardState.UnAnswered }
             };
         }
 
@@ -47,12 +47,12 @@ namespace PDD_Ukraine.Services
         //    return await Task.FromResult(true);
         //}
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Card> GetCardAsync(string id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Card>> GetCardsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(items);
         }

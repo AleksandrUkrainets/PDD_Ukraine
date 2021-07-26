@@ -3,11 +3,13 @@ using System.ComponentModel;
 
 namespace PDD_Ukraine.Models
 {
-    public class Item //: INotifyPropertyChanged
+    public class Card //: INotifyPropertyChanged
     {
         public string Id { get; set; }
-        public string Text { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
+        public string LinkToImage { get; }
+        public CardState State { get; set; }
         //private string id;
         //private string text;
         //private string description;

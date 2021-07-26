@@ -6,13 +6,13 @@ using Xamarin.Forms.Xaml;
 
 namespace PDD_Ukraine.Views
 {
-    public partial class AboutPage : ContentPage
+    public partial class FlashCardsPage : ContentPage
     {
         private bool _isFrontSideCard;
-        public AboutPage()
+        public FlashCardsPage()
         {
             InitializeComponent();
-            BindingContext = new AboutViewModel();
+            BindingContext = new FlashCardsViewModel();
         }
 
         //void OnSizeChanged(object sender, EventArgs e)
