@@ -30,6 +30,10 @@
                 </ContentView>
             </StackLayout>
         </StackLayout>-->
+        <StackLayout x:DataType="local:FlashCardsViewModel">
+            <ProgressBar x:Name="defaultProgressBar" WidthRequest="500" Progress="{Binding Progress}"
+                     VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" />
+        </StackLayout>
         <StackLayout  x:DataType="local:FlashCardsViewModel" Orientation="Vertical" Padding="10,24,10,24" Spacing="10" Grid.Row="1">
             <SwipeView>
                 <SwipeView.LeftItems>

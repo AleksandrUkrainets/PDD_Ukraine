@@ -21,6 +21,7 @@ namespace PDD_Ukraine.ViewModels
             IncorrectAnsweredCards = new ObservableCollection<Card>(GetFilteredCards(CardState.IncorrectAnswered));
             CurrentCard = UnAnsweredCards[0];
             _countsAllCards = UnAnsweredCards.Count + CorrectAnsweredCards.Count + IncorrectAnsweredCards.Count;
+            _progress = 1.0f - ((float)UnAnsweredCards.Count / (float)_countsAllCards);
         }
 
         public ICommand AddCardToTrueAnswerCommand { get; }
@@ -31,6 +32,7 @@ namespace PDD_Ukraine.ViewModels
         private Card _nextCard;
 
         private int _countsAllCards;
+        private float _progress = 0f;
 
         public ObservableCollection<Card> UnAnsweredCards { get; private set; }
         public ObservableCollection<Card> CorrectAnsweredCards { get; private set; }
@@ -42,6 +44,15 @@ namespace PDD_Ukraine.ViewModels
             set
             {
                 SetProperty(ref _currentCard, value);
+            }
+        }
+
+        public float Progress
+        {
+            get => _progress;
+            set
+            {
+                SetProperty(ref _progress, value);
             }
         }
 
@@ -81,6 +92,7 @@ namespace PDD_Ukraine.ViewModels
             {
                 UnAnsweredCards.RemoveAt(0);
             }
+            Progress = 1.0f - ((float)UnAnsweredCards.Count / (float)_countsAllCards);
         }
 
         private async Task<IEnumerable<Card>> GetCards()
