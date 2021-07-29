@@ -8,8 +8,8 @@ namespace PDD_Ukraine.Services
         //Task<bool> AddItemAsync(T item);
         //Task<bool> UpdateItemAsync(T item);
         //Task<bool> DeleteItemAsync(string id);
-        Task<T> GetCardAsync(string id);
+        //Task<T> GetCardAsync(string id);
 
-        Task<IEnumerable<T>> GetCardsAsync(bool forceRefresh = false);
+        //Task<IEnumerable<T>> GetCardsAsync(bool forceRefresh = false);
     }
 }

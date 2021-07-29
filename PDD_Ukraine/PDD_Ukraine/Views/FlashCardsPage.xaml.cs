@@ -29,8 +29,8 @@ namespace PDD_Ukraine.Views
 
         private async void RotateCard()
         {
-            absoluteLayout3.TranslateTo(100, 0, 400);
-            await absoluteLayout3.RotateYTo(-90, 200);
+            absoluteLayout3.TranslateTo(100, 0, 200);
+            await absoluteLayout3.RotateYTo(-90, 100);
             absoluteLayout3.RotationY = -270;
 
             if (!_isFrontSideCard)
@@ -46,8 +46,8 @@ namespace PDD_Ukraine.Views
                 _isFrontSideCard = false;
             }
 
-            absoluteLayout3.RotateYTo(-360, 200);
-            await absoluteLayout3.TranslateTo(0, 0, 200);
+            absoluteLayout3.RotateYTo(-360, 100);
+            await absoluteLayout3.TranslateTo(0, 0, 100);
             absoluteLayout3.RotationY = 0;
         }
 
@@ -65,8 +65,8 @@ namespace PDD_Ukraine.Views
 
         private async void MoveToStartPosition()
         {
-            absoluteLayout3.RotateYTo(-360, 200);
-            await absoluteLayout3.TranslateTo(0, 0, 200);
+            absoluteLayout3.RotateYTo(-360, 100);
+            await absoluteLayout3.TranslateTo(0, 0, 100);
             absoluteLayout3.RotationY = 0;
             imageButton.IsVisible = true;
             textButton.IsVisible = false;

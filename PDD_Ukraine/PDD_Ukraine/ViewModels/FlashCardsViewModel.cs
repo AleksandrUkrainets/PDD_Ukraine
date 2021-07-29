@@ -1,7 +1,7 @@
 ﻿using PDD_Ukraine.Models;
+using Realms;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -9,8 +9,22 @@ namespace PDD_Ukraine.ViewModels
 {
     public class FlashCardsViewModel : BaseViewModel
     {
+        private readonly Realm realm = Realm.GetInstance();
+        private readonly List<Card> items;
+
         public FlashCardsViewModel()
         {
+            //items = new List<Card>()
+            //{
+            //    new Card { Name = "First item", Description = "This is an item description.", State = CardState.CorrectAnswered.ToString()},
+            //    new Card { Name = "Second item", Description = "This is an item description.", State = CardState.IncorrectAnswered.ToString() },
+            //    new Card { Name = "Third item", Description = "This is an item description.", State = CardState.UnAnswered.ToString() },
+            //    new Card { Name = "Fourth item", Description = "This is an item description.", State = CardState.UnAnswered.ToString() },
+            //    new Card { Name = "Fifth item", Description = "This is an item description.", State = CardState.UnAnswered.ToString() },
+            //    new Card { Name = "Sixth item", Description = "This is an item description.", State = CardState.UnAnswered.ToString() }
+            //};
+
+            //FillDataBase();
             Title = "Rotate Animation with Anchors";
 
             AddCardToTrueAnswerCommand = new Command(AddCardToTrueAnswer);
@@ -19,7 +33,7 @@ namespace PDD_Ukraine.ViewModels
             UnAnsweredCards = new ObservableCollection<Card>(GetFilteredCards(CardState.UnAnswered));
             CorrectAnsweredCards = new ObservableCollection<Card>(GetFilteredCards(CardState.CorrectAnswered));
             IncorrectAnsweredCards = new ObservableCollection<Card>(GetFilteredCards(CardState.IncorrectAnswered));
-            CurrentCard = UnAnsweredCards[0];
+            CurrentCard = UnAnsweredCards.Count != 0 ? UnAnsweredCards[0] : new Card();
             _countsAllCards = UnAnsweredCards.Count + CorrectAnsweredCards.Count + IncorrectAnsweredCards.Count;
             _progress = 1.0f - ((float)UnAnsweredCards.Count / (float)_countsAllCards);
         }
@@ -69,6 +83,7 @@ namespace PDD_Ukraine.ViewModels
         {
             if (_countsAllCards - CorrectAnsweredCards.Count - IncorrectAnsweredCards.Count > 0)
             {
+                realm.Write(() => _currentCard.State = CardState.CorrectAnswered.ToString());
                 CorrectAnsweredCards.Add(_currentCard);
                 GetNextCard();
                 DeleteCurrentCard();
@@ -79,6 +94,7 @@ namespace PDD_Ukraine.ViewModels
         {
             if (_countsAllCards - CorrectAnsweredCards.Count - IncorrectAnsweredCards.Count > 0)
             {
+                realm.Write(() => _currentCard.State = CardState.IncorrectAnswered.ToString());
                 IncorrectAnsweredCards.Add(_currentCard);
                 GetNextCard();
                 DeleteCurrentCard();
@@ -95,25 +111,45 @@ namespace PDD_Ukraine.ViewModels
             Progress = 1.0f - ((float)UnAnsweredCards.Count / (float)_countsAllCards);
         }
 
-        private async Task<IEnumerable<Card>> GetCards()
-        {
-            IEnumerable<Card> cards = await DataStore.GetCardsAsync(true);
+        //private async Task<IEnumerable<Card>> GetCards()
+        //{
+        //    IEnumerable<Card> cards = await DataStore.GetCardsAsync(true);
 
-            return cards;
+        //    return cards;
+        //}
+
+        private List<Card> GetCards()
+        {
+            var cards = realm.All<Card>();
+            var listCards = new List<Card>(cards);
+            return listCards;
         }
 
         private List<Card> GetFilteredCards(CardState cardState)
         {
             List<Card> result = new List<Card>();
-            foreach (Card card in GetCards().Result)
+            foreach (Card card in GetCards())
             {
-                if (card.State == cardState)
+                if (card.State == cardState.ToString())
                 {
                     result.Add(card);
                 }
             }
 
             return result;
+        }
+
+        //--------------------
+
+        public void FillDataBase()
+        {
+            realm.Write(() =>
+            {
+                foreach (var card in items)
+                {
+                    realm.Add(card);
+                }
+            });
         }
     }
 }

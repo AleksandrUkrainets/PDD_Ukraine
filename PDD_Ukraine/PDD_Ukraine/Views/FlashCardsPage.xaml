@@ -28,9 +28,9 @@
                 </ContentView>
             </StackLayout>
         </StackLayout>-->
-        <StackLayout x:DataType="local:FlashCardsViewModel" Padding="10,10,10,10">
+        <StackLayout x:DataType="local:FlashCardsViewModel" Padding="10,10,10,10" BackgroundColor="AntiqueWhite">
             <ProgressBar x:Name="defaultProgressBar" WidthRequest="500" ProgressColor="Green" Progress="{Binding Progress}"
-                     VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" />
+                     VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" ScaleY="2" />
         </StackLayout>
         <StackLayout  x:DataType="local:FlashCardsViewModel" VerticalOptions="Center" Orientation="Vertical" Padding="10,10,10,10" Spacing="10" Grid.Row="1">
             <SwipeView>
@@ -45,18 +45,19 @@
                     </SwipeItems>
                 </SwipeView.RightItems>
                 <AbsoluteLayout x:Name="absoluteLayout3"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                                HeightRequest="352" WidthRequest="236">
-                    <ImageButton x:Name="imageButton" HeightRequest="352" WidthRequest="236" CornerRadius="30" Aspect="Fill"
+                                HeightRequest="430" WidthRequest="300">
+                    <ImageButton x:Name="imageButton" HeightRequest="430" WidthRequest="300" CornerRadius="30" Aspect="Fill"
                                  HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" BorderWidth="3" BorderColor="DarkSlateGray"
                                  Source="monkey.png" Clicked="rotateLayout_Clicked" />
-                    <Button x:Name="textButton" HeightRequest="352" WidthRequest="236" IsVisible="false" CornerRadius="30" BorderWidth="3" BorderColor="DarkSlateGray"
+                    <Button x:Name="textButton" HeightRequest="430" WidthRequest="300" IsVisible="false" CornerRadius="30" BorderWidth="3" BorderColor="DarkSlateGray"
                             Text="{Binding Path=CurrentCard.Name}"
                             BackgroundColor="Red" TextColor="AliceBlue" FontSize="20" Clicked="rotateLayout_Clicked" />
                 </AbsoluteLayout>
             </SwipeView>
         </StackLayout>
 
-        <StackLayout  x:DataType="local:FlashCardsViewModel" HorizontalOptions="FillAndExpand" BackgroundColor="AntiqueWhite"  Orientation="Horizontal" Padding="10,20,10,20" Grid.Row="2">
+        <StackLayout  x:DataType="local:FlashCardsViewModel" HorizontalOptions="FillAndExpand" BackgroundColor="AntiqueWhite"
+                      Orientation="Horizontal" Padding="10,20,10,20" Grid.Row="2">
             <!--<Label Text="{Binding Path=FalseAnswers.Count}"  TextColor="Black" FontSize="Body"></Label>
             <Label Text="{Binding Path=TrueAnswers.Count}"  TextColor="Black" FontSize="Body"></Label>-->
             <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
