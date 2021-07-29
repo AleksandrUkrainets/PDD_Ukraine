@@ -1,7 +1,4 @@
-﻿using PDD_Ukraine.ViewModels;
-using PDD_Ukraine.Views;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using Xamarin.Forms;
 
 namespace PDD_Ukraine

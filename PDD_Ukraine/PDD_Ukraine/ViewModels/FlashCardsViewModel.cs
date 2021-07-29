@@ -115,6 +115,5 @@ namespace PDD_Ukraine.ViewModels
 
             return result;
         }
-
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PDD_Ukraine.Services
@@ -10,6 +9,7 @@ namespace PDD_Ukraine.Services
         //Task<bool> UpdateItemAsync(T item);
         //Task<bool> DeleteItemAsync(string id);
         Task<T> GetCardAsync(string id);
+
         Task<IEnumerable<T>> GetCardsAsync(bool forceRefresh = false);
     }
 }

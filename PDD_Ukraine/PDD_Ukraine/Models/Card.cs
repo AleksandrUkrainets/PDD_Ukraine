@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-
-namespace PDD_Ukraine.Models
+﻿namespace PDD_Ukraine.Models
 {
     public class Card //: INotifyPropertyChanged
     {
@@ -49,7 +46,6 @@ namespace PDD_Ukraine.Models
         //        }
         //    }
         //}
-
 
         //public event PropertyChangedEventHandler PropertyChanged;
         //public void OnPropertyChanged(string prop = "")

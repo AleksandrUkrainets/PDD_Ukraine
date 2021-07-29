@@ -1,14 +1,10 @@
 ﻿using PDD_Ukraine.Services;
-using PDD_Ukraine.Views;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace PDD_Ukraine
 {
     public partial class App : Application
     {
-
         public App()
         {
             InitializeComponent();

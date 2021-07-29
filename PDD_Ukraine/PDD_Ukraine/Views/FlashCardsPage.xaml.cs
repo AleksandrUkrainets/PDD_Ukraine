@@ -1,14 +1,13 @@
 ﻿using PDD_Ukraine.ViewModels;
 using System;
-using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace PDD_Ukraine.Views
 {
     public partial class FlashCardsPage : ContentPage
     {
         private bool _isFrontSideCard;
+
         public FlashCardsPage()
         {
             InitializeComponent();

@@ -12,14 +12,16 @@ namespace PDD_Ukraine.ViewModels
     {
         public IDataStore<Card> DataStore => DependencyService.Get<IDataStore<Card>>();
 
-        bool isBusy = false;
+        private bool isBusy = false;
+
         public bool IsBusy
         {
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
         }
 
-        string title = string.Empty;
+        private string title = string.Empty;
+
         public string Title
         {
             get { return title; }
@@ -40,7 +42,9 @@ namespace PDD_Ukraine.ViewModels
         }
 
         #region INotifyPropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
@@ -49,6 +53,7 @@ namespace PDD_Ukraine.ViewModels
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
+
+        #endregion INotifyPropertyChanged
     }
 }

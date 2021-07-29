@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PDD_Ukraine.ViewModels"
              x:Class="PDD_Ukraine.Views.FlashCardsPage"
-             xmlns:local="clr-namespace:PDD_Ukraine.ViewModels"  
-             xmlns:model="clr-namespace:PDD_Ukraine.Models"  
              Title="{Binding Title}">
 
     <!--<ContentPage.BindingContext>
@@ -15,7 +14,6 @@
             <Color x:Key="Accent">#96d1ff</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
-
 
     <Grid>
         <Grid.RowDefinitions>
@@ -30,11 +28,11 @@
                 </ContentView>
             </StackLayout>
         </StackLayout>-->
-        <StackLayout x:DataType="local:FlashCardsViewModel">
-            <ProgressBar x:Name="defaultProgressBar" WidthRequest="500" Progress="{Binding Progress}"
+        <StackLayout x:DataType="local:FlashCardsViewModel" Padding="10,10,10,10">
+            <ProgressBar x:Name="defaultProgressBar" WidthRequest="500" ProgressColor="Green" Progress="{Binding Progress}"
                      VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" />
         </StackLayout>
-        <StackLayout  x:DataType="local:FlashCardsViewModel" Orientation="Vertical" Padding="10,24,10,24" Spacing="10" Grid.Row="1">
+        <StackLayout  x:DataType="local:FlashCardsViewModel" VerticalOptions="Center" Orientation="Vertical" Padding="10,10,10,10" Spacing="10" Grid.Row="1">
             <SwipeView>
                 <SwipeView.LeftItems>
                     <SwipeItems Mode="Execute">
@@ -43,26 +41,26 @@
                 </SwipeView.LeftItems>
                 <SwipeView.RightItems>
                     <SwipeItems Mode="Execute">
-                        <SwipeItem Invoked="SwipeItem_Invoked_Left"  Command="{Binding AddCardToFalseAnswerCommand}"/>
+                        <SwipeItem Invoked="SwipeItem_Invoked_Left"  Command="{Binding AddCardToFalseAnswerCommand}" />
                     </SwipeItems>
                 </SwipeView.RightItems>
-                <AbsoluteLayout x:Name="absoluteLayout3"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                <AbsoluteLayout x:Name="absoluteLayout3"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                                 HeightRequest="352" WidthRequest="236">
                     <ImageButton x:Name="imageButton" HeightRequest="352" WidthRequest="236" CornerRadius="30" Aspect="Fill"
                                  HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" BorderWidth="3" BorderColor="DarkSlateGray"
                                  Source="monkey.png" Clicked="rotateLayout_Clicked" />
                     <Button x:Name="textButton" HeightRequest="352" WidthRequest="236" IsVisible="false" CornerRadius="30" BorderWidth="3" BorderColor="DarkSlateGray"
-                            Text="{Binding Path=CurrentCard.Name}" 
-                            BackgroundColor="Red" TextColor="AliceBlue" FontSize="20" Clicked="rotateLayout_Clicked"/>
+                            Text="{Binding Path=CurrentCard.Name}"
+                            BackgroundColor="Red" TextColor="AliceBlue" FontSize="20" Clicked="rotateLayout_Clicked" />
                 </AbsoluteLayout>
             </SwipeView>
         </StackLayout>
 
-        <StackLayout  x:DataType="local:FlashCardsViewModel" HorizontalOptions="FillAndExpand" BackgroundColor="AntiqueWhite"  Orientation="Horizontal" Padding="10,24,10,24" Grid.Row="2">
+        <StackLayout  x:DataType="local:FlashCardsViewModel" HorizontalOptions="FillAndExpand" BackgroundColor="AntiqueWhite"  Orientation="Horizontal" Padding="10,20,10,20" Grid.Row="2">
             <!--<Label Text="{Binding Path=FalseAnswers.Count}"  TextColor="Black" FontSize="Body"></Label>
             <Label Text="{Binding Path=TrueAnswers.Count}"  TextColor="Black" FontSize="Body"></Label>-->
             <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
-                <Label Text="{Binding Path=IncorrectAnsweredCards.Count}" HorizontalTextAlignment="Start" Padding="10,0,10,0"
+                <Label Text="{Binding Path=IncorrectAnsweredCards.Count}" HorizontalTextAlignment="Center" Padding="10,0,10,0"
                        BackgroundColor="Red" TextColor="Black" FontSize="Title"></Label>
             </StackLayout>
             <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
@@ -70,13 +68,9 @@
                        BackgroundColor="Yellow" TextColor="Black" FontSize="Title"></Label>
             </StackLayout>
             <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
-                <Label Text="{Binding Path=CorrectAnsweredCards.Count}" HorizontalTextAlignment="End"   Padding="10,0,10,0"
+                <Label Text="{Binding Path=CorrectAnsweredCards.Count}" HorizontalTextAlignment="Center"   Padding="10,0,10,0"
                        BackgroundColor="Green" TextColor="Black" FontSize="Title"></Label>
             </StackLayout>
         </StackLayout>
-        
     </Grid>
-
-
-
 </ContentPage>
