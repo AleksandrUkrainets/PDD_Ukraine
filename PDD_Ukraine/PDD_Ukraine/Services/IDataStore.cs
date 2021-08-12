@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Realms;
 
 namespace PDD_Ukraine.Services
 {
@@ -11,5 +10,6 @@ namespace PDD_Ukraine.Services
         //Task<T> GetCardAsync(string id);
 
         //Task<IEnumerable<T>> GetCardsAsync(bool forceRefresh = false);
+        Realm GetInstance();
     }
 }

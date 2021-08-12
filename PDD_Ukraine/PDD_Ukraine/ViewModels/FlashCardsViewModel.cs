@@ -9,19 +9,26 @@ namespace PDD_Ukraine.ViewModels
 {
     public class FlashCardsViewModel : BaseViewModel
     {
-        private readonly Realm realm = Realm.GetInstance();
-        private readonly List<Card> items;
+        private Realm realm = Realm.GetInstance();
+        private List<Card> items;
+        //private Map _map;
+
+        //public override IDisposable OpenDB()
+        //{
+        //    return this.realm = RealmType.GetInstance(RealmConfiguration.DefaultConfiguration.ConfigWithPath(this.Path));
+        //}
 
         public FlashCardsViewModel()
         {
+            var instance = DataStore.GetInstance();
             //items = new List<Card>()
             //{
-            //    new Card { Name = "First item", Description = "This is an item description.", State = CardState.CorrectAnswered.ToString()},
-            //    new Card { Name = "Second item", Description = "This is an item description.", State = CardState.IncorrectAnswered.ToString() },
-            //    new Card { Name = "Third item", Description = "This is an item description.", State = CardState.UnAnswered.ToString() },
-            //    new Card { Name = "Fourth item", Description = "This is an item description.", State = CardState.UnAnswered.ToString() },
-            //    new Card { Name = "Fifth item", Description = "This is an item description.", State = CardState.UnAnswered.ToString() },
-            //    new Card { Name = "Sixth item", Description = "This is an item description.", State = CardState.UnAnswered.ToString() }
+            //    new Card { Name = "First item", Description = "This is an item description.", State = (int)CardState.CorrectAnswered },
+            //    new Card { Name = "Second item", Description = "This is an item description.", State = (int)CardState.IncorrectAnswered },
+            //    new Card { Name = "Third item", Description = "This is an item description.", State = (int)CardState.UnAnswered },
+            //    new Card { Name = "Fourth item", Description = "This is an item description.", State = (int)CardState.UnAnswered },
+            //    new Card { Name = "Fifth item", Description = "This is an item description.", State = (int)CardState.UnAnswered },
+            //    new Card { Name = "Sixth item", Description = "This is an item description.", State = (int)CardState.UnAnswered }
             //};
 
             //FillDataBase();
@@ -83,7 +90,7 @@ namespace PDD_Ukraine.ViewModels
         {
             if (_countsAllCards - CorrectAnsweredCards.Count - IncorrectAnsweredCards.Count > 0)
             {
-                realm.Write(() => _currentCard.State = CardState.CorrectAnswered.ToString());
+                realm.Write(() => _currentCard.State = (int)CardState.CorrectAnswered);
                 CorrectAnsweredCards.Add(_currentCard);
                 GetNextCard();
                 DeleteCurrentCard();
@@ -94,7 +101,7 @@ namespace PDD_Ukraine.ViewModels
         {
             if (_countsAllCards - CorrectAnsweredCards.Count - IncorrectAnsweredCards.Count > 0)
             {
-                realm.Write(() => _currentCard.State = CardState.IncorrectAnswered.ToString());
+                realm.Write(() => _currentCard.State = (int)CardState.IncorrectAnswered);
                 IncorrectAnsweredCards.Add(_currentCard);
                 GetNextCard();
                 DeleteCurrentCard();
@@ -130,7 +137,7 @@ namespace PDD_Ukraine.ViewModels
             List<Card> result = new List<Card>();
             foreach (Card card in GetCards())
             {
-                if (card.State == cardState.ToString())
+                if (card.State == (int)cardState)
                 {
                     result.Add(card);
                 }

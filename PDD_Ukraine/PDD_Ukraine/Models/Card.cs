@@ -16,7 +16,7 @@ namespace PDD_Ukraine.Models
 
         [Required]
         public string LinkToImage { get; }
-        [Required]
-        public string State { get; set; }
+
+        public int State { get; set; }
     }
 }
