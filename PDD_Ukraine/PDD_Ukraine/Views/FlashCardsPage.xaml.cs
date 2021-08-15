@@ -14,14 +14,6 @@ namespace PDD_Ukraine.Views
             BindingContext = new FlashCardsViewModel();
         }
 
-        //void OnSizeChanged(object sender, EventArgs e)
-        //{
-        //    center = new Point(absoluteLayout.Width / 2, absoluteLayout.Height / 2);
-        //    radius = Math.Min(absoluteLayout.Width, absoluteLayout.Height) / 2;
-        //    AbsoluteLayout.SetLayoutBounds(image,
-        //        new Rectangle(center.X - image.Width / 2, center.Y - radius, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
-        //}
-
         private void rotateLayout_Clicked(object sender, EventArgs e)
         {
             RotateCard();

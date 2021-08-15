@@ -1,13 +1,12 @@
-﻿using MongoDB.Bson;
+﻿using System;
+using System.Collections.Generic;
 using Realms;
+using MongoDB.Bson;
 
 namespace PDD_Ukraine.Models
 {
     public class Card : RealmObject
     {
-        [PrimaryKey]
-        public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
-
         [Required]
         public string Name { get; set; }
 
@@ -15,8 +14,10 @@ namespace PDD_Ukraine.Models
         public string Description { get; set; }
 
         [Required]
-        public string LinkToImage { get; }
+        public string LinkToImage { get; set; }
 
         public int State { get; set; }
+
+        public int Order { get; set; }
     }
 }

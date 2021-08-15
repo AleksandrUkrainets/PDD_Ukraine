@@ -6,7 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Assets\default-classes\**" />
+    <EmbeddedResource Remove="Assets\default-classes\**" />
+    <None Remove="Assets\default-classes\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Assets.rar" />
+    <None Remove="Assets\default.json" />
     <None Remove="Assets\default.realm" />
+    <None Remove="Assets\default.realm.lock" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,15 +1,20 @@
-﻿using Realms;
+﻿using PDD_Ukraine.Models;
+using Realms;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace PDD_Ukraine.Services
 {
     public interface IDataStore<T>
     {
-        //Task<bool> AddItemAsync(T item);
-        //Task<bool> UpdateItemAsync(T item);
-        //Task<bool> DeleteItemAsync(string id);
-        //Task<T> GetCardAsync(string id);
-
-        //Task<IEnumerable<T>> GetCardsAsync(bool forceRefresh = false);
         Realm GetInstance();
+
+        IEnumerable<Card> GetFilteredCards(CardState cardState);
+
+        void SetStateCard(Card currentCard, CardState cardState);
+
+        void ResetState(ObservableCollection<Card> unAnsweredCards, ObservableCollection<Card> correctAnsweredCards, ObservableCollection<Card> incorrectAnsweredCards);
+
+        void SetRandomOrder(ObservableCollection<Card> unAnsweredCards);
     }
 }

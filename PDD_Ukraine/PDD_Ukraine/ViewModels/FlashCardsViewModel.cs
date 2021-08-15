@@ -1,7 +1,8 @@
 ﻿using PDD_Ukraine.Models;
-using Realms;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -9,33 +10,13 @@ namespace PDD_Ukraine.ViewModels
 {
     public class FlashCardsViewModel : BaseViewModel
     {
-        private Realm realm = Realm.GetInstance();
-        private List<Card> items;
-        //private Map _map;
-
-        //public override IDisposable OpenDB()
-        //{
-        //    return this.realm = RealmType.GetInstance(RealmConfiguration.DefaultConfiguration.ConfigWithPath(this.Path));
-        //}
-
         public FlashCardsViewModel()
         {
-            var instance = DataStore.GetInstance();
-            //items = new List<Card>()
-            //{
-            //    new Card { Name = "First item", Description = "This is an item description.", State = (int)CardState.CorrectAnswered },
-            //    new Card { Name = "Second item", Description = "This is an item description.", State = (int)CardState.IncorrectAnswered },
-            //    new Card { Name = "Third item", Description = "This is an item description.", State = (int)CardState.UnAnswered },
-            //    new Card { Name = "Fourth item", Description = "This is an item description.", State = (int)CardState.UnAnswered },
-            //    new Card { Name = "Fifth item", Description = "This is an item description.", State = (int)CardState.UnAnswered },
-            //    new Card { Name = "Sixth item", Description = "This is an item description.", State = (int)CardState.UnAnswered }
-            //};
-
-            //FillDataBase();
             Title = "Rotate Animation with Anchors";
 
             AddCardToTrueAnswerCommand = new Command(AddCardToTrueAnswer);
             AddCardToFalseAnswerCommand = new Command(AddCardToFalseAnswer);
+            ResetStateCommand = new Command(ResetState);
 
             UnAnsweredCards = new ObservableCollection<Card>(GetFilteredCards(CardState.UnAnswered));
             CorrectAnsweredCards = new ObservableCollection<Card>(GetFilteredCards(CardState.CorrectAnswered));
@@ -47,6 +28,7 @@ namespace PDD_Ukraine.ViewModels
 
         public ICommand AddCardToTrueAnswerCommand { get; }
         public ICommand AddCardToFalseAnswerCommand { get; }
+        public ICommand ResetStateCommand { get; }
         public Command LoadCardsCommand { get; }
 
         private Card _currentCard;
@@ -86,11 +68,26 @@ namespace PDD_Ukraine.ViewModels
             else _nextCard = new Card();
         }
 
+        private void ResetState()
+        {
+            DataStore.ResetState(UnAnsweredCards, CorrectAnsweredCards, IncorrectAnsweredCards);
+            CorrectAnsweredCards.Clear();
+            IncorrectAnsweredCards.Clear();
+            DataStore.SetRandomOrder(UnAnsweredCards);
+            var sortedUnAnsweredCards = new ObservableCollection < Card > (UnAnsweredCards.OrderBy(card => card.Order));
+            UnAnsweredCards.Clear();
+            foreach(Card sortedUnAnsweredCard in sortedUnAnsweredCards)
+            {
+                UnAnsweredCards.Add(sortedUnAnsweredCard);
+            }
+            CurrentCard = UnAnsweredCards.Count != 0 ? UnAnsweredCards[0] : new Card();
+        }
+
         private void AddCardToTrueAnswer()
         {
             if (_countsAllCards - CorrectAnsweredCards.Count - IncorrectAnsweredCards.Count > 0)
             {
-                realm.Write(() => _currentCard.State = (int)CardState.CorrectAnswered);
+                DataStore.SetStateCard(_currentCard, CardState.CorrectAnswered);
                 CorrectAnsweredCards.Add(_currentCard);
                 GetNextCard();
                 DeleteCurrentCard();
@@ -101,7 +98,7 @@ namespace PDD_Ukraine.ViewModels
         {
             if (_countsAllCards - CorrectAnsweredCards.Count - IncorrectAnsweredCards.Count > 0)
             {
-                realm.Write(() => _currentCard.State = (int)CardState.IncorrectAnswered);
+                DataStore.SetStateCard(_currentCard, CardState.IncorrectAnswered);
                 IncorrectAnsweredCards.Add(_currentCard);
                 GetNextCard();
                 DeleteCurrentCard();
@@ -118,45 +115,9 @@ namespace PDD_Ukraine.ViewModels
             Progress = 1.0f - ((float)UnAnsweredCards.Count / (float)_countsAllCards);
         }
 
-        //private async Task<IEnumerable<Card>> GetCards()
-        //{
-        //    IEnumerable<Card> cards = await DataStore.GetCardsAsync(true);
-
-        //    return cards;
-        //}
-
-        private List<Card> GetCards()
+        private IEnumerable<Card> GetFilteredCards(CardState cardState)
         {
-            var cards = realm.All<Card>();
-            var listCards = new List<Card>(cards);
-            return listCards;
-        }
-
-        private List<Card> GetFilteredCards(CardState cardState)
-        {
-            List<Card> result = new List<Card>();
-            foreach (Card card in GetCards())
-            {
-                if (card.State == (int)cardState)
-                {
-                    result.Add(card);
-                }
-            }
-
-            return result;
-        }
-
-        //--------------------
-
-        public void FillDataBase()
-        {
-            realm.Write(() =>
-            {
-                foreach (var card in items)
-                {
-                    realm.Add(card);
-                }
-            });
+            return DataStore.GetFilteredCards(cardState);
         }
     }
 }

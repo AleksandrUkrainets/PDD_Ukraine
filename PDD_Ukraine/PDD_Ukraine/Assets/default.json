@@ -1,0 +1,420 @@
+{
+  "Card": [
+    {
+      "Id": "6117e4f3945a7070cf7824e9",
+      "Name": "«Опасный поворот направо»",
+      "Description": "This is an item description.",
+      "LinkToImage": "one_one.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117e4f3945a7070cf7824ea",
+      "Name": "«Опасный поворот налево»",
+      "Description": "This is an item description.",
+      "LinkToImage": "one_two_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117e4f3945a7070cf7824eb",
+      "Name": "«Несколько поворотов»",
+      "Description": "This is an item description.",
+      "LinkToImage": "one_three__one_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117e4f3945a7070cf7824ec",
+      "Name": "«Несколько поворотов»",
+      "Description": "This is an item description.",
+      "LinkToImage": "one_three__two_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117e4f3945a7070cf7824ed",
+      "Name": "«Направление поворота»",
+      "Description": "This is an item description.",
+      "LinkToImage": "one_four__one_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117e4f3945a7070cf7824ee",
+      "Name": "«Направление поворота»",
+      "Description": "This is an item description.",
+      "LinkToImage": "one_four__two_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f59d5f02aed147b45ae5",
+      "Name": "«Сужение дороги»",
+      "Description": "«Сужение дороги»",
+      "LinkToImage": "one_five__one_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f5e05f02aed147b45ae6",
+      "Name": "«Сужение дороги»",
+      "Description": "«Сужение дороги»",
+      "LinkToImage": "one_five__two_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f5e65f02aed147b45ae7",
+      "Name": "«Сужение дороги»",
+      "Description": "«Сужение дороги»",
+      "LinkToImage": "one_five__three_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f6295f02aed147b45ae8",
+      "Name": "«Крутой подъем»",
+      "Description": "«Крутой подъем»",
+      "LinkToImage": "one_six_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f63d5f02aed147b45ae9",
+      "Name": "«Крутой спуск»",
+      "Description": "«Крутой спуск»",
+      "LinkToImage": "one_seven_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f64f5f02aed147b45aea",
+      "Name": "«Выезд на набережную или берег»",
+      "Description": "«Выезд на набережную или берег»",
+      "LinkToImage": "one_eight_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f6615f02aed147b45aeb",
+      "Name": "«Туннель»",
+      "Description": "«Туннель»",
+      "LinkToImage": "one_nine_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f6835f02aed147b45aec",
+      "Name": "«Неровная дорога»",
+      "Description": "«Неровная дорога»",
+      "LinkToImage": "one_one_zero_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f69f5f02aed147b45aed",
+      "Name": "«Бугор»",
+      "Description": "«Бугор»",
+      "LinkToImage": "one_one_one_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f6bb5f02aed147b45aee",
+      "Name": "«Выбоина»",
+      "Description": "«Выбоина»",
+      "LinkToImage": "one_one_two_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f6ce5f02aed147b45aef",
+      "Name": "«Скользкая дорога»",
+      "Description": "«Скользкая дорога»",
+      "LinkToImage": "one_one_three_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f6e55f02aed147b45af0",
+      "Name": "«Выброс каменных материалов»",
+      "Description": "«Выброс каменных материалов»",
+      "LinkToImage": "one_one_four_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f6f95f02aed147b45af1",
+      "Name": "«Опасная обочина»",
+      "Description": "«Опасная обочина»",
+      "LinkToImage": "one_one_five_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f70d5f02aed147b45af2",
+      "Name": "«Падение камней»",
+      "Description": "«Падение камней»",
+      "LinkToImage": "one_one_six_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f7225f02aed147b45af3",
+      "Name": "«Боковой ветер»",
+      "Description": "«Боковой ветер»",
+      "LinkToImage": "one_one_seven_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f73b5f02aed147b45af4",
+      "Name": "«Низколетящие самолеты»",
+      "Description": "«Низколетящие самолеты»",
+      "LinkToImage": "one_one_eight_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f74f5f02aed147b45af5",
+      "Name": "«Пересечение с круговым движением»",
+      "Description": "«Пересечение с круговым движением»",
+      "LinkToImage": "one_one_nine_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f7615f02aed147b45af6",
+      "Name": "«Пересечение с трамвайными путями»",
+      "Description": "«Пересечение с трамвайными путями»",
+      "LinkToImage": "one_two_zero_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f77d5f02aed147b45af7",
+      "Name": "«Пересечение равнозначных дорог»",
+      "Description": "«Пересечение равнозначных дорог»",
+      "LinkToImage": "one_two_one_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f7a65f02aed147b45af8",
+      "Name": "«Пересечение с второстепенной дорогой»",
+      "Description": "«Пересечение с второстепенной дорогой»",
+      "LinkToImage": "one_two_two_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f7bb5f02aed147b45af9",
+      "Name": "«Прилегание второстепенной дороги»",
+      "Description": "«Прилегание второстепенной дороги»",
+      "LinkToImage": "one_two_three__one_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f7c15f02aed147b45afa",
+      "Name": "«Прилегание второстепенной дороги»",
+      "Description": "«Прилегание второстепенной дороги»",
+      "LinkToImage": "one_two_three__two_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f7c65f02aed147b45afb",
+      "Name": "«Прилегание второстепенной дороги»",
+      "Description": "«Прилегание второстепенной дороги»",
+      "LinkToImage": "one_two_three__three_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f7cb5f02aed147b45afc",
+      "Name": "«Прилегание второстепенной дороги»",
+      "Description": "«Прилегание второстепенной дороги»",
+      "LinkToImage": "one_two_three__four_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f8015f02aed147b45afd",
+      "Name": "«Светофорное регулирование»",
+      "Description": "«Светофорное регулирование»",
+      "LinkToImage": "one_two_four_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f8135f02aed147b45afe",
+      "Name": "«Разводной мост»",
+      "Description": "«Разводной мост»",
+      "LinkToImage": "one_two_five_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f8255f02aed147b45aff",
+      "Name": "«Двустороннее движение»",
+      "Description": "«Двустороннее движение»",
+      "LinkToImage": "one_two_six_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f8385f02aed147b45b00",
+      "Name": "«Железнодорожный переезд со шлагбаумом»",
+      "Description": "«Железнодорожный переезд со шлагбаумом»",
+      "LinkToImage": "one_two_seven_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f84c5f02aed147b45b01",
+      "Name": "«Железнодорожный переезд без шлагбаума»",
+      "Description": "«Железнодорожный переезд без шлагбаума»",
+      "LinkToImage": "one_two_eight_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f85e5f02aed147b45b02",
+      "Name": "«Однопутная железная дорога»",
+      "Description": "«Однопутная железная дорога»",
+      "LinkToImage": "one_two_nine_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f8745f02aed147b45b03",
+      "Name": "«Многопутная железная дорога»",
+      "Description": "«Многопутная железная дорога»",
+      "LinkToImage": "one_three_zero_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f8915f02aed147b45b04",
+      "Name": "«Приближение к железнодорожному переезду»",
+      "Description": "«Приближение к железнодорожному переезду»",
+      "LinkToImage": "one_three_one_one_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f8965f02aed147b45b05",
+      "Name": "«Приближение к железнодорожному переезду»",
+      "Description": "«Приближение к железнодорожному переезду»",
+      "LinkToImage": "one_three_one_two_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f89c5f02aed147b45b06",
+      "Name": "«Приближение к железнодорожному переезду»",
+      "Description": "«Приближение к железнодорожному переезду»",
+      "LinkToImage": "one_three_one_three_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f8a15f02aed147b45b07",
+      "Name": "«Приближение к железнодорожному переезду»",
+      "Description": "«Приближение к железнодорожному переезду»",
+      "LinkToImage": "one_three_one_four_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f8a65f02aed147b45b08",
+      "Name": "«Приближение к железнодорожному переезду»",
+      "Description": "«Приближение к железнодорожному переезду»",
+      "LinkToImage": "one_three_one_five_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f8ab5f02aed147b45b09",
+      "Name": "«Приближение к железнодорожному переезду»",
+      "Description": "«Приближение к железнодорожному переезду»",
+      "LinkToImage": "one_three_one_six_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f9145f02aed147b45b0a",
+      "Name": "«Пешеходный переход»",
+      "Description": "«Пешеходный переход»",
+      "LinkToImage": "one_three_two_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f9275f02aed147b45b0b",
+      "Name": "«Дети»",
+      "Description": "«Дети»",
+      "LinkToImage": "one_three_three_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f9385f02aed147b45b0c",
+      "Name": "«Выезд велосипедистов»",
+      "Description": "«Выезд велосипедистов»",
+      "LinkToImage": "one_three_four_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f94d5f02aed147b45b0d",
+      "Name": "«Перегон скота»",
+      "Description": "«Перегон скота»",
+      "LinkToImage": "one_three_five_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f9615f02aed147b45b0e",
+      "Name": "«Дикие животные»",
+      "Description": "«Дикие животные»",
+      "LinkToImage": "one_three_six_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f97d5f02aed147b45b0f",
+      "Name": "«Дорожные работы»",
+      "Description": "«Дорожные работы»",
+      "LinkToImage": "one_three_seven_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f98f5f02aed147b45b10",
+      "Name": "«Заторы в дорожном движении»",
+      "Description": "«Заторы в дорожном движении»",
+      "LinkToImage": "one_three_eight_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f9a35f02aed147b45b11",
+      "Name": "«Иная опасность (аварийно опасный участок)»",
+      "Description": "«Иная опасность (аварийно опасный участок)»",
+      "LinkToImage": "one_three_nine_.png",
+      "State": 0,
+      "Order": 0
+    },
+    {
+      "Id": "6117f9c75f02aed147b45b12",
+      "Name": "«Изменение покрытия»",
+      "Description": "«Изменение покрытия»",
+      "LinkToImage": "one_four_zero__.png",
+      "State": 0,
+      "Order": 0
+    }
+  ]
+}

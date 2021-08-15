@@ -12203,19 +12203,178 @@ namespace PDD_Ukraine.Droid
 			public const int notify_panel_notification_icon_bg = 2131165328;
 			
 			// aapt resource value: 0x7F070091
-			public const int preference_list_divider_material = 2131165329;
+			public const int one_eight_ = 2131165329;
 			
 			// aapt resource value: 0x7F070092
-			public const int test_custom_background = 2131165330;
+			public const int one_five__one_ = 2131165330;
 			
 			// aapt resource value: 0x7F070093
-			public const int tooltip_frame_dark = 2131165331;
+			public const int one_five__three_ = 2131165331;
 			
 			// aapt resource value: 0x7F070094
-			public const int tooltip_frame_light = 2131165332;
+			public const int one_five__two_ = 2131165332;
+			
+			// aapt resource value: 0x7F070098
+			public const int one_four_zero__ = 2131165336;
 			
 			// aapt resource value: 0x7F070095
-			public const int xamarin_logo = 2131165333;
+			public const int one_four__one_ = 2131165333;
+			
+			// aapt resource value: 0x7F070096
+			public const int one_four__three_ = 2131165334;
+			
+			// aapt resource value: 0x7F070097
+			public const int one_four__two_ = 2131165335;
+			
+			// aapt resource value: 0x7F070099
+			public const int one_nine_ = 2131165337;
+			
+			// aapt resource value: 0x7F07009A
+			public const int one_one = 2131165338;
+			
+			// aapt resource value: 0x7F07009B
+			public const int one_one_eight_ = 2131165339;
+			
+			// aapt resource value: 0x7F07009C
+			public const int one_one_five_ = 2131165340;
+			
+			// aapt resource value: 0x7F07009D
+			public const int one_one_four_ = 2131165341;
+			
+			// aapt resource value: 0x7F07009E
+			public const int one_one_nine_ = 2131165342;
+			
+			// aapt resource value: 0x7F07009F
+			public const int one_one_one_ = 2131165343;
+			
+			// aapt resource value: 0x7F0700A0
+			public const int one_one_seven_ = 2131165344;
+			
+			// aapt resource value: 0x7F0700A1
+			public const int one_one_six_ = 2131165345;
+			
+			// aapt resource value: 0x7F0700A2
+			public const int one_one_three_ = 2131165346;
+			
+			// aapt resource value: 0x7F0700A3
+			public const int one_one_two_ = 2131165347;
+			
+			// aapt resource value: 0x7F0700A4
+			public const int one_one_zero_ = 2131165348;
+			
+			// aapt resource value: 0x7F0700A5
+			public const int one_seven_ = 2131165349;
+			
+			// aapt resource value: 0x7F0700A6
+			public const int one_six_ = 2131165350;
+			
+			// aapt resource value: 0x7F0700A9
+			public const int one_three_eight_ = 2131165353;
+			
+			// aapt resource value: 0x7F0700AA
+			public const int one_three_five_ = 2131165354;
+			
+			// aapt resource value: 0x7F0700AB
+			public const int one_three_four_ = 2131165355;
+			
+			// aapt resource value: 0x7F0700AC
+			public const int one_three_nine_ = 2131165356;
+			
+			// aapt resource value: 0x7F0700AD
+			public const int one_three_one_five_ = 2131165357;
+			
+			// aapt resource value: 0x7F0700AE
+			public const int one_three_one_four_ = 2131165358;
+			
+			// aapt resource value: 0x7F0700AF
+			public const int one_three_one_one_ = 2131165359;
+			
+			// aapt resource value: 0x7F0700B0
+			public const int one_three_one_six_ = 2131165360;
+			
+			// aapt resource value: 0x7F0700B1
+			public const int one_three_one_three_ = 2131165361;
+			
+			// aapt resource value: 0x7F0700B2
+			public const int one_three_one_two_ = 2131165362;
+			
+			// aapt resource value: 0x7F0700B3
+			public const int one_three_seven_ = 2131165363;
+			
+			// aapt resource value: 0x7F0700B4
+			public const int one_three_six_ = 2131165364;
+			
+			// aapt resource value: 0x7F0700B5
+			public const int one_three_three_ = 2131165365;
+			
+			// aapt resource value: 0x7F0700B6
+			public const int one_three_two_ = 2131165366;
+			
+			// aapt resource value: 0x7F0700B7
+			public const int one_three_zero_ = 2131165367;
+			
+			// aapt resource value: 0x7F0700A7
+			public const int one_three__one_ = 2131165351;
+			
+			// aapt resource value: 0x7F0700A8
+			public const int one_three__two_ = 2131165352;
+			
+			// aapt resource value: 0x7F0700B8
+			public const int one_two_ = 2131165368;
+			
+			// aapt resource value: 0x7F0700B9
+			public const int one_two_eight_ = 2131165369;
+			
+			// aapt resource value: 0x7F0700BA
+			public const int one_two_five_ = 2131165370;
+			
+			// aapt resource value: 0x7F0700BB
+			public const int one_two_four_ = 2131165371;
+			
+			// aapt resource value: 0x7F0700BC
+			public const int one_two_nine_ = 2131165372;
+			
+			// aapt resource value: 0x7F0700BD
+			public const int one_two_one_ = 2131165373;
+			
+			// aapt resource value: 0x7F0700BE
+			public const int one_two_seven_ = 2131165374;
+			
+			// aapt resource value: 0x7F0700BF
+			public const int one_two_six_ = 2131165375;
+			
+			// aapt resource value: 0x7F0700C0
+			public const int one_two_three__four_ = 2131165376;
+			
+			// aapt resource value: 0x7F0700C1
+			public const int one_two_three__one_ = 2131165377;
+			
+			// aapt resource value: 0x7F0700C2
+			public const int one_two_three__three_ = 2131165378;
+			
+			// aapt resource value: 0x7F0700C3
+			public const int one_two_three__two_ = 2131165379;
+			
+			// aapt resource value: 0x7F0700C4
+			public const int one_two_two_ = 2131165380;
+			
+			// aapt resource value: 0x7F0700C5
+			public const int one_two_zero_ = 2131165381;
+			
+			// aapt resource value: 0x7F0700C6
+			public const int preference_list_divider_material = 2131165382;
+			
+			// aapt resource value: 0x7F0700C7
+			public const int test_custom_background = 2131165383;
+			
+			// aapt resource value: 0x7F0700C8
+			public const int tooltip_frame_dark = 2131165384;
+			
+			// aapt resource value: 0x7F0700C9
+			public const int tooltip_frame_light = 2131165385;
+			
+			// aapt resource value: 0x7F0700CA
+			public const int xamarin_logo = 2131165386;
 			
 			static Drawable()
 			{
