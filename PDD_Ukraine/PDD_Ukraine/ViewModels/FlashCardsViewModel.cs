@@ -1,4 +1,5 @@
-﻿using PDD_Ukraine.Models;
+﻿using MLToolkit.Forms.SwipeCardView.Core;
+using PDD_Ukraine.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,11 +13,13 @@ namespace PDD_Ukraine.ViewModels
     {
         public FlashCardsViewModel()
         {
-            Title = "Rotate Animation with Anchors";
+            Title = "Знаки ПДД Украины";
 
-            AddCardToTrueAnswerCommand = new Command(AddCardToTrueAnswer);
-            AddCardToFalseAnswerCommand = new Command(AddCardToFalseAnswer);
-            ResetStateCommand = new Command(ResetState);
+            //AddCardToTrueAnswerCommand = new Command(AddCardToTrueAnswer);
+            //AddCardToFalseAnswerCommand = new Command(AddCardToFalseAnswer);
+            //ResetStateCommand = new Command(ResetState);
+            Threshold = (uint)(App.ScreenWidth / 3);
+            SwipedCommand = new Command<SwipedCardEventArgs>(OnSwipedCommand);
 
             UnAnsweredCards = new ObservableCollection<Card>(GetFilteredCards(CardState.UnAnswered));
             CorrectAnsweredCards = new ObservableCollection<Card>(GetFilteredCards(CardState.CorrectAnswered));
@@ -24,18 +27,37 @@ namespace PDD_Ukraine.ViewModels
             CurrentCard = UnAnsweredCards.Count != 0 ? UnAnsweredCards[0] : new Card();
             _countsAllCards = UnAnsweredCards.Count + CorrectAnsweredCards.Count + IncorrectAnsweredCards.Count;
             _progress = 1.0f - ((float)UnAnsweredCards.Count / (float)_countsAllCards);
+            //ResetState();
         }
 
-        public ICommand AddCardToTrueAnswerCommand { get; }
-        public ICommand AddCardToFalseAnswerCommand { get; }
-        public ICommand ResetStateCommand { get; }
-        public Command LoadCardsCommand { get; }
+        private void OnSwipedCommand(SwipedCardEventArgs eventArgs)
+        {
+            var direction = eventArgs.Direction;
+            switch (direction)
+            {
+                case SwipeCardDirection.Right:
+                    AddCardToTrueAnswer();
+                    return;
+                case SwipeCardDirection.Left:
+                    AddCardToFalseAnswer();
+                    return;
+                case SwipeCardDirection.Down:
+                    ResetState();
+                    return;
+            }
+        }
+
+        //public ICommand AddCardToTrueAnswerCommand { get; }
+        //public ICommand AddCardToFalseAnswerCommand { get; }
+        //public ICommand ResetStateCommand { get; }
+        public ICommand SwipedCommand { get; }
 
         private Card _currentCard;
         private Card _nextCard;
 
         private int _countsAllCards;
         private float _progress = 0f;
+        private uint _threshold;
 
         public ObservableCollection<Card> UnAnsweredCards { get; private set; }
         public ObservableCollection<Card> CorrectAnsweredCards { get; private set; }
@@ -59,6 +81,15 @@ namespace PDD_Ukraine.ViewModels
             }
         }
 
+        public uint Threshold
+        {
+            get => _threshold;
+            set
+            {
+                SetProperty(ref _threshold, value);
+            }
+        }
+
         public void GetNextCard()
         {
             if (UnAnsweredCards.Count > 1)
@@ -76,11 +107,15 @@ namespace PDD_Ukraine.ViewModels
             DataStore.SetRandomOrder(UnAnsweredCards);
             var sortedUnAnsweredCards = new ObservableCollection < Card > (UnAnsweredCards.OrderBy(card => card.Order));
             UnAnsweredCards.Clear();
+
             foreach(Card sortedUnAnsweredCard in sortedUnAnsweredCards)
             {
                 UnAnsweredCards.Add(sortedUnAnsweredCard);
             }
+
             CurrentCard = UnAnsweredCards.Count != 0 ? UnAnsweredCards[0] : new Card();
+            _countsAllCards = UnAnsweredCards.Count + CorrectAnsweredCards.Count + IncorrectAnsweredCards.Count;
+            Progress = 1.0f - ((float)UnAnsweredCards.Count / (float)_countsAllCards);
         }
 
         private void AddCardToTrueAnswer()
