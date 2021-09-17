@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\SwipeCardView\src\MLToolkit.Forms.SwipeCardView\MLToolkit.Forms.SwipeCardView.csproj" />
+    <ProjectReference Include="..\..\MLToolkit.Forms.SwipeCardView\MLToolkit.Forms.SwipeCardView.csproj" />
   </ItemGroup>
 
   <ItemGroup>

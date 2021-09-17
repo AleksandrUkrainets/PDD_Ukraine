@@ -9,6 +9,8 @@ namespace PDD_Ukraine.Services
     {
         Realm GetInstance();
 
+        IEnumerable<Card> GetCards();
+
         IEnumerable<Card> GetFilteredCards(CardState cardState);
 
         void SetStateCard(Card currentCard, CardState cardState);

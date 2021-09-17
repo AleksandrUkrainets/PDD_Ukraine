@@ -14,20 +14,17 @@ namespace PDD_Ukraine.ViewModels
         public FlashCardsViewModel()
         {
             Title = "Знаки ПДД Украины";
-
-            //AddCardToTrueAnswerCommand = new Command(AddCardToTrueAnswer);
-            //AddCardToFalseAnswerCommand = new Command(AddCardToFalseAnswer);
-            //ResetStateCommand = new Command(ResetState);
             Threshold = (uint)(App.ScreenWidth / 3);
             SwipedCommand = new Command<SwipedCardEventArgs>(OnSwipedCommand);
 
             UnAnsweredCards = new ObservableCollection<Card>(GetFilteredCards(CardState.UnAnswered));
             CorrectAnsweredCards = new ObservableCollection<Card>(GetFilteredCards(CardState.CorrectAnswered));
             IncorrectAnsweredCards = new ObservableCollection<Card>(GetFilteredCards(CardState.IncorrectAnswered));
+            AllCards = new ObservableCollection<Card>(GetCards());
+            
             CurrentCard = UnAnsweredCards.Count != 0 ? UnAnsweredCards[0] : new Card();
             _countsAllCards = UnAnsweredCards.Count + CorrectAnsweredCards.Count + IncorrectAnsweredCards.Count;
             _progress = 1.0f - ((float)UnAnsweredCards.Count / (float)_countsAllCards);
-            //ResetState();
         }
 
         private void OnSwipedCommand(SwipedCardEventArgs eventArgs)
@@ -47,9 +44,6 @@ namespace PDD_Ukraine.ViewModels
             }
         }
 
-        //public ICommand AddCardToTrueAnswerCommand { get; }
-        //public ICommand AddCardToFalseAnswerCommand { get; }
-        //public ICommand ResetStateCommand { get; }
         public ICommand SwipedCommand { get; }
 
         private Card _currentCard;
@@ -62,6 +56,7 @@ namespace PDD_Ukraine.ViewModels
         public ObservableCollection<Card> UnAnsweredCards { get; private set; }
         public ObservableCollection<Card> CorrectAnsweredCards { get; private set; }
         public ObservableCollection<Card> IncorrectAnsweredCards { get; private set; }
+        public ObservableCollection<Card> AllCards { get; private set; }
 
         public Card CurrentCard
         {
@@ -153,6 +148,11 @@ namespace PDD_Ukraine.ViewModels
         private IEnumerable<Card> GetFilteredCards(CardState cardState)
         {
             return DataStore.GetFilteredCards(cardState);
+        }
+
+        private IEnumerable<Card> GetCards()
+        {
+            return DataStore.GetCards();
         }
     }
 }

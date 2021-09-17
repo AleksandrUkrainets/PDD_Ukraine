@@ -1,8 +1,9 @@
-﻿using MLToolkit.Forms.SwipeCardView.Core;
-using PDD_Ukraine.ViewModels;
+﻿using PDD_Ukraine.ViewModels;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using MLToolkit.Forms.SwipeCardView;
+using MLToolkit.Forms.SwipeCardView.Core;
 
 namespace PDD_Ukraine.Views
 {

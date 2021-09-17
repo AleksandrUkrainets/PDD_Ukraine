@@ -44,8 +44,12 @@ namespace PDD_Ukraine.Services
 
         public IEnumerable<Card> GetFilteredCards(CardState cardState)
         {
-            var rrr = _realmInstance.All<Card>();
             return _realmInstance.All<Card>().Where(x => x.State == (int)cardState);
+        }
+
+        public IEnumerable<Card> GetCards()
+        {
+            return _realmInstance.All<Card>();
         }
 
         public void SetStateCard(Card currentCard, CardState cardState)
