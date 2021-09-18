@@ -1,6 +1,6 @@
 ﻿using MLToolkit.Forms.SwipeCardView.Core;
 using PDD_Ukraine.Models;
-using System;
+using PDD_Ukraine.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,40 +11,39 @@ namespace PDD_Ukraine.ViewModels
 {
     public class FlashCardsViewModel : BaseViewModel
     {
-        public FlashCardsViewModel()
+        public FlashCardsViewModel(INavigation navigation)
         {
             Title = "Знаки ПДД Украины";
             Threshold = (uint)(App.ScreenWidth / 3);
             SwipedCommand = new Command<SwipedCardEventArgs>(OnSwipedCommand);
+            ContinueCommand = new Command(OnContinue);
+            EndCommand = new Command(OnEnd);
 
-            UnAnsweredCards = new ObservableCollection<Card>(GetFilteredCards(CardState.UnAnswered));
+            //EmergencyReset();
+
+            UnAnsweredCards = new ObservableRangeCollection<Card>(GetFilteredCards(CardState.UnAnswered));
+            AllCards = new ObservableRangeCollection<Card>(GetFilteredCards(CardState.UnAnswered));
             CorrectAnsweredCards = new ObservableCollection<Card>(GetFilteredCards(CardState.CorrectAnswered));
             IncorrectAnsweredCards = new ObservableCollection<Card>(GetFilteredCards(CardState.IncorrectAnswered));
-            AllCards = new ObservableCollection<Card>(GetCards());
-            
+
             CurrentCard = UnAnsweredCards.Count != 0 ? UnAnsweredCards[0] : new Card();
             _countsAllCards = UnAnsweredCards.Count + CorrectAnsweredCards.Count + IncorrectAnsweredCards.Count;
             _progress = 1.0f - ((float)UnAnsweredCards.Count / (float)_countsAllCards);
+            OnCheckBalanceCards();
         }
 
-        private void OnSwipedCommand(SwipedCardEventArgs eventArgs)
+        private void EmergencyReset()
         {
-            var direction = eventArgs.Direction;
-            switch (direction)
+            foreach (var card in GetCards())
             {
-                case SwipeCardDirection.Right:
-                    AddCardToTrueAnswer();
-                    return;
-                case SwipeCardDirection.Left:
-                    AddCardToFalseAnswer();
-                    return;
-                case SwipeCardDirection.Down:
-                    ResetState();
-                    return;
+                DataStore.SetStateCard(card, CardState.UnAnswered);
             }
         }
 
+
         public ICommand SwipedCommand { get; }
+        public ICommand ContinueCommand { get; }
+        public ICommand EndCommand { get; }
 
         private Card _currentCard;
         private Card _nextCard;
@@ -52,11 +51,14 @@ namespace PDD_Ukraine.ViewModels
         private int _countsAllCards;
         private float _progress = 0f;
         private uint _threshold;
+        private bool _isVisibleContinueButton = false;
+        private bool _isVisibleEndButton = false;
+        private string _backgroundImage = "background.png";
 
-        public ObservableCollection<Card> UnAnsweredCards { get; private set; }
+        public ObservableRangeCollection<Card> UnAnsweredCards { get; private set; }
         public ObservableCollection<Card> CorrectAnsweredCards { get; private set; }
         public ObservableCollection<Card> IncorrectAnsweredCards { get; private set; }
-        public ObservableCollection<Card> AllCards { get; private set; }
+        public ObservableRangeCollection<Card> AllCards { get; private set; }
 
         public Card CurrentCard
         {
@@ -85,6 +87,34 @@ namespace PDD_Ukraine.ViewModels
             }
         }
 
+        public bool IsVisibleContinueButton
+        {
+            get => _isVisibleContinueButton;
+            set
+            {
+                SetProperty(ref _isVisibleContinueButton, value);
+            }
+        }
+
+        public bool IsVisibleEndButton
+
+        {
+            get => _isVisibleEndButton;
+            set
+            {
+                SetProperty(ref _isVisibleEndButton, value);
+            }
+        }
+
+        public string BackgroundImage
+        {
+            get => _backgroundImage;
+            set
+            {
+                SetProperty(ref _backgroundImage, value);
+            }
+        }
+
         public void GetNextCard()
         {
             if (UnAnsweredCards.Count > 1)
@@ -94,20 +124,129 @@ namespace PDD_Ukraine.ViewModels
             else _nextCard = new Card();
         }
 
+
+        private void OnSwipedCommand(SwipedCardEventArgs eventArgs)
+        {
+            var direction = eventArgs.Direction;
+            switch (direction)
+            {
+                case SwipeCardDirection.Right:
+                    AddCardToTrueAnswer();
+                    OnCheckBalanceCards();
+                    return;
+
+                case SwipeCardDirection.Left:
+                    AddCardToFalseAnswer();
+                    OnCheckBalanceCards();
+                    return;
+
+                case SwipeCardDirection.Down:
+                    ResetState();
+                    OnCheckBalanceCards();
+                    return;
+            }
+        }
+
+        private void OnCheckBalanceCards()
+        {
+            if(UnAnsweredCards.Count == 0)
+            {
+                IsVisibleEndButton = true;
+                IsVisibleContinueButton = true;
+                BackgroundImage = "back_empty.png";
+            }
+            else
+            {
+                IsVisibleEndButton = false;
+                IsVisibleContinueButton = false;
+                BackgroundImage = "background.png";
+            }
+        }
+
+        private void OnContinue()
+        {
+            if (IncorrectAnsweredCards.Count != 0)
+            {
+                _countsAllCards = AllCards.Count();
+                AllCards.Clear();
+
+                foreach (var card in UnAnsweredCards)//
+                {
+                    DataStore.SetStateCard(card, CardState.Ended);//
+                }
+                UnAnsweredCards.Clear();//
+
+                DataStore.SetRandomOrder(IncorrectAnsweredCards);
+                var sortedIncorrectAnsweredCards = new ObservableCollection<Card>(IncorrectAnsweredCards.OrderBy(card => card.Order));
+
+                UnAnsweredCards.AddRange(sortedIncorrectAnsweredCards);
+                AllCards.AddRange(sortedIncorrectAnsweredCards);
+
+                foreach (var card in IncorrectAnsweredCards)
+                {
+                    DataStore.SetStateCard(card, CardState.UnAnswered);
+                }
+
+                foreach (var card in CorrectAnsweredCards)
+                {
+                    DataStore.SetStateCard(card, CardState.Ended);
+                }
+
+                CorrectAnsweredCards.Clear();
+                IncorrectAnsweredCards.Clear();
+                ResetProgress();
+            }
+            else
+            {
+                OnRestart();
+            }
+
+            BackgroundImage = "background.png";
+            IsVisibleEndButton = false;
+            IsVisibleContinueButton = false;
+        }
+
+        private void OnEnd()
+        {
+        }
+
+        private void OnRestart()
+        {           
+            var allCards = new ObservableCollection<Card>(GetCards());
+            foreach (var card in allCards)//
+            {
+                DataStore.SetStateCard(card, CardState.UnAnswered);//
+            }
+            DataStore.SetRandomOrder(allCards);
+
+            CorrectAnsweredCards.Clear();
+            IncorrectAnsweredCards.Clear();
+            UnAnsweredCards.Clear();
+            UnAnsweredCards.AddRange(allCards);
+            AllCards.AddRange(allCards);
+            ResetProgress();
+        }
+
         private void ResetState()
         {
             DataStore.ResetState(UnAnsweredCards, CorrectAnsweredCards, IncorrectAnsweredCards);
             CorrectAnsweredCards.Clear();
             IncorrectAnsweredCards.Clear();
             DataStore.SetRandomOrder(UnAnsweredCards);
-            var sortedUnAnsweredCards = new ObservableCollection < Card > (UnAnsweredCards.OrderBy(card => card.Order));
+            var sortedUnAnsweredCards = new ObservableCollection<Card>(UnAnsweredCards.OrderBy(card => card.Order));
             UnAnsweredCards.Clear();
 
-            foreach(Card sortedUnAnsweredCard in sortedUnAnsweredCards)
-            {
-                UnAnsweredCards.Add(sortedUnAnsweredCard);
-            }
+            //foreach (Card sortedUnAnsweredCard in sortedUnAnsweredCards)
+            //{
+            //    UnAnsweredCards.Add(sortedUnAnsweredCard);
+            //}
+            UnAnsweredCards.AddRange(sortedUnAnsweredCards);
 
+            ResetProgress();
+        }
+
+        private void ResetProgress()
+        {
             CurrentCard = UnAnsweredCards.Count != 0 ? UnAnsweredCards[0] : new Card();
             _countsAllCards = UnAnsweredCards.Count + CorrectAnsweredCards.Count + IncorrectAnsweredCards.Count;
             Progress = 1.0f - ((float)UnAnsweredCards.Count / (float)_countsAllCards);

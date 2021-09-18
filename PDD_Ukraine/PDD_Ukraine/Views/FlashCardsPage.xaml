@@ -4,7 +4,7 @@
              xmlns:swipeCardView="clr-namespace:MLToolkit.Forms.SwipeCardView;assembly=MLToolkit.Forms.SwipeCardView"
              xmlns:local="clr-namespace:PDD_Ukraine.ViewModels"
              x:Class="PDD_Ukraine.Views.FlashCardsPage"
-             
+             BackgroundImage = "{Binding Path=BackgroundImage}"
              Title="{Binding Title}">
     <!--BackgroundImage = "background.png"-->
 
@@ -20,30 +20,28 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
+
         <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="10,15,10,15" Grid.Row="0">
             <Frame x:Name="RedFrame" HorizontalOptions="FillAndExpand"  BorderColor="#262F40" BackgroundColor="#8095BF" Padding="0" CornerRadius="24" Opacity="1">
-                <Label  x:Name="RedLabel" Text="{Binding Path=IncorrectAnsweredCards.Count}" TextColor="#262F40" BackgroundColor="Transparent" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+                <Label  x:Name="RedLabel" Text="{Binding Path=IncorrectAnsweredCards.Count}" TextColor="#262F40" BackgroundColor="Transparent" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
                        VerticalOptions="CenterAndExpand" FontSize="Subtitle" Margin="5"></Label>
             </Frame>
             <Frame x:Name="YellowFrame" HorizontalOptions="FillAndExpand" BorderColor="#262F40" BackgroundColor="#8095BF" Padding="0" CornerRadius="24" Opacity="1">
-                <Label  x:Name="YellowLabel" Text="{Binding Path=UnAnsweredCards.Count}" TextColor="#262F40" BackgroundColor="Transparent" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+                <Label  x:Name="YellowLabel" Text="{Binding Path=UnAnsweredCards.Count}" TextColor="#262F40" BackgroundColor="Transparent" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
                        VerticalOptions="CenterAndExpand" FontSize="Subtitle" Margin="5"></Label>
             </Frame>
             <Frame x:Name="GreenFrame" HorizontalOptions="FillAndExpand" BorderColor="#262F40" BackgroundColor="#8095BF" Padding="0" CornerRadius="24" Opacity="1">
-                <Label x:Name="GreenLabel" Text="{Binding Path=CorrectAnsweredCards.Count}" TextColor="#262F40" BackgroundColor="Transparent" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+                <Label x:Name="GreenLabel" Text="{Binding Path=CorrectAnsweredCards.Count}" TextColor="#262F40" BackgroundColor="Transparent" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
                        VerticalOptions="CenterAndExpand" FontSize="Subtitle" Margin="5"></Label>
             </Frame>
         </StackLayout>
 
-        <StackLayout x:Name="absoluteLayout3" Orientation="Vertical" BackgroundColor="Transparent" 
+        <StackLayout x:Name="absoluteLayout3" Orientation="Vertical" BackgroundColor="Transparent" IsVisible="{Binding Path=!IsVisibleEndButton}"
                       Padding="10,5,10,10" Spacing="10" Grid.Row="1">
             <swipeCardView:SwipeCardView
                 x:Name="SwipeCardView"
                 ItemsSource = "{Binding AllCards}"
                 SwipedCommand = "{Binding  SwipedCommand}"
-                ItemIndex = "{Binding Path=UnAnsweredCards.Count}"
-                UnAnsweredCards ="{Binding UnAnsweredCards}"
                 VerticalOptions = " FillAndExpand "
                 HorizontalOptions="FillAndExpand"
                 Padding="10"
@@ -74,6 +72,14 @@
                     </DataTemplate>
                 </swipeCardView:SwipeCardView.ItemTemplate>
             </swipeCardView:SwipeCardView>
+        </StackLayout>
+        <StackLayout IsVisible="{Binding Path=IsVisibleEndButton}" HorizontalOptions="Center" VerticalOptions="End" Orientation="Horizontal"
+                     BackgroundColor="Transparent"  Grid.Row="1"  Padding="0, 0, 0, 50">
+            <Button Text="Закончить" IsVisible="{Binding Path=IsVisibleEndButton}" HeightRequest="50" WidthRequest="170"
+                    TextColor="#262F40" FontSize="Subtitle" Margin="2" BorderColor="DarkSlateGray" BorderWidth="2" CornerRadius="10"
+                    Clicked="NavigateToMainPage"  ></Button>
+            <Button Text="Продолжить" Command="{Binding ContinueCommand}" IsVisible="{Binding Path=IsVisibleContinueButton}" HeightRequest="50" WidthRequest="170"
+                    TextColor="#262F40" FontSize="Subtitle" Margin="2" BorderColor="DarkSlateGray" BorderWidth="2" CornerRadius="10"></Button>
         </StackLayout>
 
         <StackLayout x:DataType="local:FlashCardsViewModel" Padding="10,30,10,30" BackgroundColor="Transparent"  Grid.Row="2">

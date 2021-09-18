@@ -19,14 +19,6 @@ namespace MLToolkit.Forms.SwipeCardView
                 null,
                 propertyChanged: OnItemsSourcePropertyChanged);
 
-        public static readonly BindableProperty UnAnsweredCardsProperty =
-            BindableProperty.Create(
-                nameof(UnAnsweredCards),
-                typeof(IList),
-                typeof(SwipeCardView),
-                null,
-                propertyChanged: OnUnAnsweredCardsPropertyChanged);
-
         public static readonly BindableProperty ItemTemplateProperty =
             BindableProperty.Create(
                 nameof(ItemTemplate),
@@ -42,15 +34,6 @@ namespace MLToolkit.Forms.SwipeCardView
                 null,
                 BindingMode.OneWayToSource);
 
-        // TODO Uncomment to enable the feature
-        ////public static readonly BindableProperty PreviousItemProperty =
-        ////    BindableProperty.Create(
-        ////        nameof(PreviousItem),
-        ////        typeof(object),
-        ////        typeof(SwipeCardView),
-        ////        null,
-        ////        BindingMode.OneWayToSource);
-
         public static readonly BindableProperty TappedCommandProperty =
             BindableProperty.Create(
                 nameof(TappedCommand),
@@ -61,7 +44,7 @@ namespace MLToolkit.Forms.SwipeCardView
             BindableProperty.Create(
                 nameof(TappedCommandParameter),
                 typeof(object),
-                    typeof(SwipeCardView));
+                typeof(SwipeCardView));
 
         public static readonly BindableProperty SwipedCommandProperty =
             BindableProperty.Create(
@@ -73,7 +56,7 @@ namespace MLToolkit.Forms.SwipeCardView
             BindableProperty.Create(
                 nameof(SwipedCommandParameter),
                 typeof(object),
-                    typeof(SwipeCardView));
+                typeof(SwipeCardView));
 
         public static readonly BindableProperty DraggingCommandProperty =
             BindableProperty.Create(
@@ -135,13 +118,6 @@ namespace MLToolkit.Forms.SwipeCardView
                 typeof(bool),
                 typeof(SwipeCardView),
                 DefaultLoopCards);
-
-        public static readonly BindableProperty ItemIndexProperty =
-            BindableProperty.Create(
-                nameof(ItemIndex),
-                typeof(int),
-                typeof(SwipeCardView),
-                DefaultItemIndex);
 
         private const uint DefaultThreshold = 100;
 
@@ -215,15 +191,6 @@ namespace MLToolkit.Forms.SwipeCardView
                     observable.CollectionChanged -= this.OnItemSourceCollectionChanged;
                 }
             }
-
-            if (this.UnAnsweredCards != null)
-            {
-                var observable = this.UnAnsweredCards as INotifyCollectionChanged;
-                if (observable != null)
-                {
-                    observable.CollectionChanged -= this.OnItemSourceCollectionChanged;
-                }
-            }
         }
 
         public event EventHandler<SwipedCardEventArgs> Swiped;
@@ -238,12 +205,6 @@ namespace MLToolkit.Forms.SwipeCardView
             set => SetValue(ItemsSourceProperty, value);
         }
 
-        public IList UnAnsweredCards
-        {
-            get => (IList)GetValue(UnAnsweredCardsProperty);
-            set => SetValue(UnAnsweredCardsProperty, value);
-        }
-
         public DataTemplate ItemTemplate
         {
             get => (DataTemplate)GetValue(ItemTemplateProperty);
@@ -255,13 +216,6 @@ namespace MLToolkit.Forms.SwipeCardView
             get => (object)GetValue(TopItemProperty);
             set => SetValue(TopItemProperty, value);
         }
-
-        // TODO Uncomment to enable the feature
-        ////public object PreviousItem
-        ////{
-        ////    get => (object)GetValue(PreviousItemProperty);
-        ////    set => SetValue(PreviousItemProperty, value);
-        ////}
 
         public ICommand TappedCommand
         {
@@ -339,12 +293,6 @@ namespace MLToolkit.Forms.SwipeCardView
         {
             get => (bool)GetValue(LoopCardsProperty);
             set => SetValue(LoopCardsProperty, value);
-        }
-
-        public int ItemIndex
-        {
-            get => (int)GetValue(ItemIndexProperty);
-            set => SetValue(ItemIndexProperty, value);
         }
 
         private DraggingCardPosition DraggingCardPosition { get; set; }
@@ -455,12 +403,13 @@ namespace MLToolkit.Forms.SwipeCardView
         private static void OnItemsSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var swipeCardView = (SwipeCardView)bindable;
+            swipeCardView._itemIndex = 0;
             var observable = oldValue as INotifyCollectionChanged;
             if (observable != null)
             {
                 observable.CollectionChanged -= swipeCardView.OnItemSourceCollectionChanged;
             }
-
+            swipeCardView.Setup();
             observable = newValue as INotifyCollectionChanged;
             if (observable != null)
             {
@@ -468,18 +417,9 @@ namespace MLToolkit.Forms.SwipeCardView
             }
         }
 
-        private static void OnUnAnsweredCardsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var swipeCardView = (SwipeCardView)bindable;
-            var itemsCount = swipeCardView.ItemsSource.Count;
-            var unAnsweredCardsCount = swipeCardView.UnAnsweredCards.Count;
-            swipeCardView._itemIndex = itemsCount - unAnsweredCardsCount; 
-            swipeCardView.Setup();
-        }
-
         private void OnItemSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == NotifyCollectionChangedAction.Reset)
+            if (e.Action == NotifyCollectionChangedAction.Reset || e.Action == NotifyCollectionChangedAction.Replace)
             {
                 _itemIndex = 0;
                 foreach (var card in _cards)
@@ -501,10 +441,9 @@ namespace MLToolkit.Forms.SwipeCardView
             }
         }
 
-      
         private void Setup()
         {
-            if (ItemsSource == null || UnAnsweredCards == null) // || UnAnsweredCards == null
+            if (ItemsSource == null) // || UnAnsweredCards == null
             {
                 return;
             }
@@ -742,11 +681,10 @@ namespace MLToolkit.Forms.SwipeCardView
                 TopItem = ItemsSource.Count > 0 ? ItemsSource[_itemIndex] : null;
             }
 
-
             var topCard = _cards[_topCardIndex];
             _topCardIndex = NextCardIndex(_topCardIndex);
 
-            // If there are more cards to show, show the next card in the place of 
+            // If there are more cards to show, show the next card in the place of
             // the card that was swiped off the screen
             if (_itemIndex < ItemsSource.Count)
             {
@@ -819,7 +757,6 @@ namespace MLToolkit.Forms.SwipeCardView
                 TopItem = null;
                 _itemIndex = 0;
                 Setup();
-                
             }
             var cmd = SwipedCommand;
             if (cmd != null && cmd.CanExecute(SwipedCommandParameter))
@@ -848,30 +785,30 @@ namespace MLToolkit.Forms.SwipeCardView
             var label = topCard.FindByName("Text") as Label;
             if (!_isFrontSideCard)
             {
-                topCard.TranslateTo(128, 0, 300);
-                await topCard.RotateYTo(-90, 150);
+                topCard.TranslateTo(128, 0, 150);
+                await topCard.RotateYTo(-90, 100);
                 topCard.RotationY = -270;
 
                 image.IsVisible = false;
                 label.IsVisible = true;
                 _isFrontSideCard = true;
 
-                topCard.RotateYTo(-360, 150);
-                await topCard.TranslateTo(0, 0, 300);
+                topCard.RotateYTo(-360, 100);
+                await topCard.TranslateTo(0, 0, 150);
                 topCard.RotationY = 0;
             }
             else
             {
-                topCard.TranslateTo(128, 0, 300);
-                await topCard.RotateYTo(-90, 150);
+                topCard.TranslateTo(128, 0, 150);
+                await topCard.RotateYTo(-90, 100);
                 topCard.RotationY = -270;
 
                 image.IsVisible = true;
                 label.IsVisible = false;
                 _isFrontSideCard = false;
 
-                topCard.RotateYTo(-360, 150);
-                await topCard.TranslateTo(0, 0, 300);
+                topCard.RotateYTo(-360, 100);
+                await topCard.TranslateTo(0, 0, 150);
                 topCard.RotationY = 0;
             }
         }

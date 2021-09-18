@@ -52,9 +52,9 @@ namespace PDD_Ukraine.Services
             return _realmInstance.All<Card>();
         }
 
-        public void SetStateCard(Card currentCard, CardState cardState)
+        public void SetStateCard(Card card, CardState cardState)
         {
-            _realmInstance.Write(() => currentCard.State = (int)cardState);
+            _realmInstance.Write(() => card.State = (int)cardState);
         }
 
         public void ResetState(ObservableCollection<Card> unAnsweredCards, ObservableCollection<Card> correctAnsweredCards, ObservableCollection<Card> incorrectAnsweredCards)

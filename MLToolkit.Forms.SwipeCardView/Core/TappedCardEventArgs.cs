@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MLToolkit.Forms.SwipeCardView.Core
+﻿namespace MLToolkit.Forms.SwipeCardView.Core
 {
     public class TappedCardEventArgs : System.EventArgs
     {
-
         public TappedCardEventArgs(object item, object parameter)
         {
             Item = item;

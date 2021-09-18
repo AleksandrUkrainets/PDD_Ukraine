@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PDD_Ukraine.Views.MainPage"
+             BackgroundImage = "{Binding Path=BackgroundImage}"
+             Title="{Binding Title}">
+
+    <ContentPage.Content>        
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Orientation="Vertical"
+                     BackgroundColor="Transparent"  Padding="0, 0, 0, 50">
+            <Label x:Name="Text" IsVisible="true" FontSize="20" FontAttributes="Bold" TextColor="#262F40" HorizontalTextAlignment="Center" HeightRequest="170" WidthRequest="270">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="1.1.12&#10;"></Span>
+                        <Span Text="rtyrtyrtyrtyfvbnfdghfhbrtugnbbfghsfghtfrhysthsrt"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Button Text="Начать" HeightRequest="50" WidthRequest="170"
+                    TextColor="#262F40" FontSize="Subtitle" Margin="2" BorderColor="DarkSlateGray" BorderWidth="2" CornerRadius="10"
+                    Clicked="NavigateToCardsPage"  ></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

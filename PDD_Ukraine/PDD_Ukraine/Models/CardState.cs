@@ -4,6 +4,7 @@
     {
         UnAnswered,
         CorrectAnswered,
-        IncorrectAnswered
+        IncorrectAnswered,
+        Ended
     }
 }

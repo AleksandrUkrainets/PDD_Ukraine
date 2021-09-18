@@ -1,9 +1,9 @@
-﻿using PDD_Ukraine.ViewModels;
+﻿using MLToolkit.Forms.SwipeCardView;
+using MLToolkit.Forms.SwipeCardView.Core;
+using PDD_Ukraine.ViewModels;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using MLToolkit.Forms.SwipeCardView;
-using MLToolkit.Forms.SwipeCardView.Core;
 
 namespace PDD_Ukraine.Views
 {
@@ -12,7 +12,7 @@ namespace PDD_Ukraine.Views
         public FlashCardsPage()
         {
             InitializeComponent();
-            BindingContext = new FlashCardsViewModel();
+            BindingContext = new FlashCardsViewModel(Navigation);
             SwipeCardView.Dragging += OnDragging;
             SwipeCardView.Tapped += OnTapped;
         }
@@ -87,6 +87,11 @@ namespace PDD_Ukraine.Views
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        async void NavigateToMainPage(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//MainPage");
         }
     }
 }
